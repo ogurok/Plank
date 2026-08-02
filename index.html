@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Plank — таймер планки з AI-тренером</title>
+<meta name="description" content="Plank — таймер планки для Android із AI-тренером, статистикою, серіями та Health Connect. Постав планку, все інше програма порахує сама.">
+<link rel="icon" type="image/png" href="images/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="container">
+    <a class="nav-logo" href="#top">
+      <img src="images/icon.png" alt="">
+      <span>PLANK</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#features">Можливості</a></li>
+      <li><a href="#screens">Екрани</a></li>
+      <li><a href="#levels">Рівні</a></li>
+    </ul>
+    <a class="nav-cta" href="Plank.apk" download>Завантажити APK</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <div class="hero-badge">
+        <img src="images/icon.png" alt="">
+        <span class="eyebrow">Таймер планки · Android</span>
+      </div>
+      <h1><span class="plain">Сильніше</span><br><span class="neon-word">щодня.</span></h1>
+      <p class="lede">Таймер тримає час підходу, AI-тренер щодня оцінює форму за сном і пульсом, а серія рахує кожен день поспіль. Постав планку — решту програма порахує сама.</p>
+      <div class="hero-cta">
+        <a class="btn-primary" href="Plank.apk" download>
+          Завантажити APK
+        </a>
+        <a class="btn-text" href="#features">Всі можливості ↓</a>
+      </div>
+    </div>
+
+    <div class="demo-card">
+      <p class="demo-eyebrow eyebrow">Спробуй прямо зараз</p>
+      <div class="ring-wrap">
+        <svg class="ring" viewBox="0 0 200 200">
+          <circle class="ring-track" cx="100" cy="100" r="90"></circle>
+          <circle class="ring-fill" id="ringFill" cx="100" cy="100" r="90"></circle>
+        </svg>
+        <div class="ring-center">
+          <span class="demo-time" id="demoTime">00:00</span>
+          <span class="demo-state" id="demoState">Готовий</span>
+        </div>
+      </div>
+      <button class="demo-btn" id="demoBtn" type="button">Старт</button>
+      <p class="demo-note">Рекорд цієї сесії: <span id="demoBest">—:—</span></p>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="features">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Можливості</p>
+      <h2>П'ять екранів. Одна звичка.</h2>
+      <p>Стільки ж вкладок, скільки й у самій програмі — кожна відповідає за свою частину звички.</p>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⏱️</div>
+        <h3>Тренування</h3>
+        <p>Постав ціль у секундах і кількість підходів, тримай форму за таймером — або обери вільне тренування без ліміту й спробуй побити власний рекорд.</p>
+        <span class="feature-tab">Тренування</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Статистика</h3>
+        <p>Кращий час, кількість тренувань і спалені калорії за 7, 30, 90 днів чи весь час — з графіками, які показують, куди рухається прогрес.</p>
+        <span class="feature-tab">Статистика</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏅</div>
+        <h3>Нагороди</h3>
+        <p>Відкривай бейджі за перше тренування, тижневі серії та рівні майстерності — від Новачка до Атлета.</p>
+        <span class="feature-tab">Нагороди</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🏆</div>
+        <h3>Рейтинг</h3>
+        <p>Порівнюй свою серію тренувань із друзями та іншими користувачами й тримай позицію в загальному заліку.</p>
+        <span class="feature-tab">Рейтинг</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Тренер</h3>
+        <p>Щодня отримуй оцінку форми від 0 до 100 на основі сну, кроків і пульсу спокою — з поясненням, що саме на неї вплинуло.</p>
+        <span class="feature-tab">AI Тренер</span>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔥</div>
+        <h3>Серії</h3>
+        <p>Тренуйся щодня, щоб не перервати серію. Один пропущений день — і лічильник починає спочатку.</p>
+        <span class="feature-tab">Серія</span>
+      </div>
+    </div>
+
+    <div class="integration-banner">
+      <div class="feature-icon">❤️</div>
+      <div>
+        <h3>Health Connect</h3>
+        <p>Синхронізуй кроки, сон і пульс із Android Health Connect — AI-тренер враховує ці дані в кожній щоденній оцінці форми.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="screens">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Екрани</p>
+      <h2>Як це виглядає</h2>
+      <p>Реальні скріншоти програми — гортай вбік.</p>
+    </div>
+  </div>
+  <div class="container">
+    <div class="screens-track">
+      <div class="screen-item">
+        <div class="phone"><img src="images/screen7.jpg" alt="Екран таймера тренування з відліком часу" loading="lazy"></div>
+        <p class="screen-caption">Таймер тренування<span>Тренування</span></p>
+      </div>
+      <div class="screen-item">
+        <div class="phone"><img src="images/screen2.jpg" alt="AI-тренер показує оцінку форми 80 зі 100" loading="lazy"></div>
+        <p class="screen-caption">Оцінка від AI-тренера<span>AI Тренер</span></p>
+      </div>
+      <div class="screen-item">
+        <div class="phone"><img src="images/screen1.jpg" alt="Розбір факторів оцінки: сон, кроки, пульс" loading="lazy"></div>
+        <p class="screen-caption">Сон, кроки, пульс<span>AI Тренер</span></p>
+      </div>
+      <div class="screen-item">
+        <div class="phone"><img src="images/screen6.jpg" alt="Тижнева статистика та дані Health Connect" loading="lazy"></div>
+        <p class="screen-caption">Тижнева статистика<span>Статистика</span></p>
+      </div>
+      <div class="screen-item">
+        <div class="phone"><img src="images/screen5.jpg" alt="Детальна аналітика прогресу та стабільності" loading="lazy"></div>
+        <p class="screen-caption">Детальна аналітика<span>Статистика</span></p>
+      </div>
+      <div class="screen-item">
+        <div class="phone"><img src="images/screen3.jpg" alt="Рівні майстерності від Новачка до Атлета" loading="lazy"></div>
+        <p class="screen-caption">Рівні майстерності<span>Нагороди</span></p>
+      </div>
+      <div class="screen-item">
+        <div class="phone"><img src="images/screen4.jpg" alt="Нагороди за серії тренувань" loading="lazy"></div>
+        <p class="screen-caption">Нагороди за серії<span>Нагороди</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="levels">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Рівні майстерності</p>
+      <h2>Шлях від новачка до атлета</h2>
+      <p>Рівень залежить від загального часу планки — не від одного рекордного підходу.</p>
+    </div>
+
+    <div class="levels-track">
+      <div class="level-node">
+        <div class="node-line" aria-hidden="true"></div>
+        <div class="node-dot">🔰</div>
+        <h4>Новачок</h4>
+        <p class="node-req">1 хв+</p>
+      </div>
+      <div class="level-node">
+        <div class="node-line" aria-hidden="true"></div>
+        <div class="node-dot">🛡️</div>
+        <h4>Початківець</h4>
+        <p class="node-req">3 хв+</p>
+      </div>
+      <div class="level-node">
+        <div class="node-line" aria-hidden="true"></div>
+        <div class="node-dot">🥈</div>
+        <h4>Стажер</h4>
+        <p class="node-req">6 хв+</p>
+      </div>
+      <div class="level-node">
+        <div class="node-line" aria-hidden="true"></div>
+        <div class="node-dot">🥉</div>
+        <h4>Аматор</h4>
+        <p class="node-req">10 хв+</p>
+      </div>
+      <div class="level-node">
+        <div class="node-line" aria-hidden="true"></div>
+        <div class="node-dot">🏵️</div>
+        <h4>Практик</h4>
+        <p class="node-req">далі</p>
+      </div>
+      <div class="level-node is-final">
+        <div class="node-line" aria-hidden="true"></div>
+        <div class="node-dot">🏆</div>
+        <h4>Атлет</h4>
+        <p class="node-req">максимум</p>
+      </div>
+    </div>
+
+    <div class="badge-grid">
+      <div class="badge-card">
+        <div class="b-icon">🌱</div>
+        <div><h5>Перший крок</h5><p>Заверши перше тренування</p></div>
+      </div>
+      <div class="badge-card">
+        <div class="b-icon">🔥</div>
+        <div><h5>3 дні поспіль</h5><p>Тренуйся 3 дні підряд</p></div>
+      </div>
+      <div class="badge-card">
+        <div class="b-icon">⚡</div>
+        <div><h5>Тижневий воїн</h5><p>7 днів підряд</p></div>
+      </div>
+      <div class="badge-card">
+        <div class="b-icon">💎</div>
+        <div><h5>Два тижні</h5><p>14 днів безперервних тренувань</p></div>
+      </div>
+      <div class="badge-card">
+        <div class="b-icon">👑</div>
+        <div><h5>Чемпіон</h5><p>30 днів підряд</p></div>
+      </div>
+      <div class="badge-card">
+        <div class="b-icon">🏆</div>
+        <div><h5>Залізна воля</h5><p>60 днів підряд</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section on-dark download" id="download">
+  <div class="container">
+    <div class="section-head">
+      <p class="eyebrow">Завантаження</p>
+      <h2>Готовий тримати планку?</h2>
+      <p>Один APK-файл, без Google Play. Встанови й почни серію вже сьогодні.</p>
+    </div>
+    <a class="btn-primary" href="Plank.apk" download>Завантажити APK</a>
+    <p class="download-version">Версія 3.13.0 · Android</p>
+    <p class="download-note">Якщо Android попередить про невідоме джерело — дозволь встановлення в Налаштуваннях → Безпека і спробуй ще раз.</p>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <a class="footer-brand" href="#top">
+      <img src="images/icon.png" alt="">
+      <span>PLANK</span>
+    </a>
+    <ul class="footer-links">
+      <li><a href="#features">Можливості</a></li>
+      <li><a href="#screens">Екрани</a></li>
+      <li><a href="#levels">Рівні</a></li>
+    </ul>
+    <span class="footer-meta">© 2026 Plank · зроблено з 🔥</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
