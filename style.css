@@ -151,6 +151,52 @@ a:focus-visible, button:focus-visible{
   transition:color .15s ease;
 }
 .nav-links a:hover{color:#fff}
+
+.nav-right{
+  display:flex; align-items:center; gap:14px;
+}
+
+/* language switch — three flags, Ukrainian on by default */
+.lang-switch{
+  display:flex; align-items:center; gap:2px;
+  background:rgba(255,255,255,.06);
+  border:1px solid var(--ink-line);
+  border-radius:999px;
+  padding:3px;
+}
+.lang-btn{
+  display:flex; align-items:center; gap:5px;
+  border:none;
+  background:transparent;
+  color:#9497a6;
+  font-family:var(--body);
+  font-weight:700;
+  font-size:11.5px;
+  letter-spacing:.03em;
+  padding:6px 9px;
+  border-radius:999px;
+  cursor:pointer;
+  transition:background .15s ease, color .15s ease;
+}
+.lang-flag{
+  display:inline-flex; align-items:center; justify-content:center;
+  width:19px; height:14px;
+  border-radius:3px;
+  overflow:hidden;
+  box-shadow:0 0 0 1px rgba(255,255,255,.28);
+  flex:none;
+}
+.lang-flag svg{ display:block; width:100%; height:100%; }
+.lang-btn:hover{ color:#fff; }
+.lang-btn.is-active{
+  background:var(--moss-bright);
+  color:var(--ink);
+}
+@media (max-width:520px){
+  .lang-code{ display:none; }
+  .lang-btn{ padding:6px 8px; }
+}
+
 .nav-cta{
   font-family:var(--body);
   font-weight:800;
@@ -170,6 +216,15 @@ a:focus-visible, button:focus-visible{
 }
 @media (max-width:760px){
   .nav-links{display:none}
+}
+@media (max-width:480px){
+  .nav .container{ padding:0 16px; }
+  .nav-logo span{ display:none; }
+  .nav-right{ gap:8px; }
+  .lang-switch{ padding:2px; gap:0; }
+  .lang-btn{ padding:5px 7px; }
+  .lang-flag{ font-size:13px; }
+  .nav-cta{ padding:9px 14px; font-size:12.5px; }
 }
 
 /* =========================================================
@@ -683,6 +738,18 @@ a:focus-visible, button:focus-visible{
   color:var(--neon-dim);
   text-transform:uppercase;
 }
+.download-contact{
+  margin-top:14px;
+  font-size:13.5px;
+  color:#9498a6;
+}
+.download-contact a{
+  color:var(--moss-bright);
+  text-decoration:underline;
+  text-underline-offset:3px;
+  font-weight:700;
+}
+.download-contact a:hover{ color:var(--neon); }
 
 /* =========================================================
    FOOTER
@@ -702,6 +769,16 @@ a:focus-visible, button:focus-visible{
 .footer-links{ display:flex; gap:24px; list-style:none; margin:0; padding:0; }
 .footer-links a{ text-decoration:none; color:#9497a6; font-size:13.5px; font-weight:600; }
 .footer-links a:hover{ color:var(--neon); }
+.footer-contact{
+  font-size:13px;
+  font-family:var(--mono);
+  color:#9497a6;
+  text-decoration:none;
+  border-bottom:1px solid rgba(255,255,255,.18);
+  padding-bottom:1px;
+  transition:color .15s ease, border-color .15s ease;
+}
+.footer-contact:hover{ color:var(--moss-bright); border-color:var(--moss-bright); }
 .footer-meta{ font-size:12.5px; font-family:var(--mono); color:#63667a; }
 @media (max-width:640px){
   .footer .container{ flex-direction:column; text-align:center; }
