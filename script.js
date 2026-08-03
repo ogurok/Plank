@@ -94,3 +94,38 @@ if (nav) {
 
   btn.addEventListener('click', () => (running ? stop() : start()));
 })();
+
+/* ---------------------------------------------------------
+   Scroll-reveal for feature cards, screenshots, level nodes
+   and badges. Purely a progressive enhancement: skipped if
+   the browser lacks IntersectionObserver or the visitor has
+   asked for reduced motion.
+   --------------------------------------------------------- */
+(() => {
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced || !('IntersectionObserver' in window)) return;
+
+  const groups = [
+    document.querySelectorAll('.feature-grid > .feature-card'),
+    document.querySelectorAll('.screens-track > .screen-item'),
+    document.querySelectorAll('.levels-track > .level-node'),
+    document.querySelectorAll('.badge-grid > .badge-card'),
+  ];
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+
+  groups.forEach(list => {
+    list.forEach((el, i) => {
+      el.classList.add('reveal');
+      el.style.transitionDelay = `${Math.min(i, 5) * 0.06}s`;
+      io.observe(el);
+    });
+  });
+})();

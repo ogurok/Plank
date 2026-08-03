@@ -1,32 +1,63 @@
 /* =========================================================
    PLANK — design tokens
-   Dark neon world (brand/hero/footer) → light app-surface world
-   (features/screens/levels), mirroring the product's own UI.
+   Dark neon world (brand mark: icon/hero/footer) → the app's
+   own light surface world (features/screens/levels), using
+   the actual in-app palette sampled from real screenshots:
+   moss green primary, coral/teal/violet/gold as data accents,
+   exactly like the app's own icon chips and stat cards.
    ========================================================= */
 :root{
+  /* brand-mark world (black tile + glowing lime, as on the app icon) */
   --ink:        #0a0a0f;
   --ink-soft:   #15151e;
   --ink-line:   rgba(255,255,255,.10);
   --neon:       #d7ff3f;
   --neon-dim:   #a7cc2c;
   --neon-glow:  rgba(215,255,63,.45);
-  --ember:      #ff7a45;
 
-  --surface:      #eceef6;
-  --surface-alt:  #e2e5f0;
+  /* the app's own green, as it actually appears on white screens —
+     one hue, two calibrations: brighter for dark backgrounds,
+     muted/olive for light ones */
+  --moss-bright:      #9fe046;
+  --moss-bright-glow: rgba(159,224,70,.4);
+  --moss:       #6f9a2e;
+  --moss-deep:  #4f7a1c;
+  --moss-soft:  #e7f1d6;
+
+  /* data accents, sampled from the app's stat & badge chips */
+  --coral:      #ff8a5c;
+  --coral-deep: #c85a2e;
+  --coral-soft: #ffe4d7;
+  --teal:       #2fb39a;
+  --teal-deep:  #1c8672;
+  --teal-soft:  #d9f2ec;
+  --violet:     #8d7cf0;
+  --violet-deep:#4a3aac;
+  --violet-soft:#e7e3fb;
+  --gold:       #e0a930;
+  --gold-deep:  #a97a12;
+  --gold-soft:  #faf0d8;
+  --blue:       #4f8fe0;
+  --bronze:     #b9793f;
+  --steel:      #7b8494;
+  --ember:      #ff7a45;
+  --ember-deep: #c9531f;
+
+  --surface:      #e6e8f2;
+  --surface-alt:  #dbdeea;
   --card:         #ffffff;
-  --ink-body:     #1b1d29;
+  --ink-body:     #20233a;
   --muted:        #6b6f80;
-  --line:         #dfe1ec;
+  --line:         #dcdfec;
 
   --display: "Bebas Neue", "Arial Narrow", sans-serif;
   --body: "Manrope", system-ui, -apple-system, "Segoe UI", sans-serif;
   --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
 
   --container: 1120px;
-  --radius-lg: 28px;
-  --radius-md: 18px;
-  --radius-sm: 12px;
+  --radius-lg: 30px;
+  --radius-md: 20px;
+  --radius-sm: 14px;
 }
 
 *{box-sizing:border-box}
@@ -66,9 +97,16 @@ p{margin:0}
 
 /* focus visibility */
 a:focus-visible, button:focus-visible{
-  outline:2px solid var(--neon);
+  outline:2px solid var(--moss-bright);
   outline-offset:3px;
   border-radius:6px;
+}
+
+/* the app's own icon treatment: a black glyph tile framed with a
+   thin white ring, exactly how it sits on every screen of the app */
+.nav-logo img, .footer-brand img, .hero-badge img{
+  border-radius:22%;
+  box-shadow:0 0 0 1.5px rgba(255,255,255,.88), 0 0 18px rgba(215,255,63,.22);
 }
 
 /* =========================================================
@@ -163,6 +201,17 @@ a:focus-visible, button:focus-visible{
   filter:blur(10px);
   pointer-events:none;
 }
+.hero::after{
+  /* a second, warmer glow low-right for depth — the ember that
+     shows up throughout the app's streak and calorie accents */
+  content:"";
+  position:absolute;
+  bottom:-180px; right:-140px;
+  width:560px; height:440px;
+  background:radial-gradient(circle, rgba(255,122,69,.18) 0%, rgba(255,122,69,0) 70%);
+  filter:blur(20px);
+  pointer-events:none;
+}
 .hero-inner{
   position:relative;
   display:grid;
@@ -238,7 +287,11 @@ a:focus-visible, button:focus-visible{
 }
 .btn-text:hover{ color:var(--neon); border-color:var(--neon); }
 
-/* ---- interactive timer demo card ---- */
+/* ---- interactive timer demo card ----
+   this ring and button use --moss-bright, the same green the
+   app itself uses for its live timer ring and Start button —
+   the moment you touch the demo, the palette shifts from the
+   brand mark's neon into the app's actual in-use green. */
 .demo-card{
   position:relative;
   background:linear-gradient(180deg, #17171f, #101016);
@@ -246,7 +299,7 @@ a:focus-visible, button:focus-visible{
   border-radius:var(--radius-lg);
   padding:30px 28px 26px;
   text-align:center;
-  box-shadow:0 0 60px rgba(215,255,63,.06), 0 30px 60px rgba(0,0,0,.45);
+  box-shadow:0 0 60px rgba(159,224,70,.08), 0 30px 60px rgba(0,0,0,.45);
 }
 .demo-eyebrow{
   color:var(--neon-dim);
@@ -262,9 +315,9 @@ a:focus-visible, button:focus-visible{
   fill:none; stroke:rgba(255,255,255,.08); stroke-width:8;
 }
 .ring-fill{
-  fill:none; stroke:var(--neon); stroke-width:8; stroke-linecap:round;
+  fill:none; stroke:var(--moss-bright); stroke-width:8; stroke-linecap:round;
   stroke-dasharray:565.48; stroke-dashoffset:565.48;
-  filter:drop-shadow(0 0 8px var(--neon-glow));
+  filter:drop-shadow(0 0 8px var(--moss-bright-glow));
   transition:stroke-dashoffset .3s linear;
 }
 .ring-center{
@@ -290,14 +343,14 @@ a:focus-visible, button:focus-visible{
   font-weight:800;
   font-size:15px;
   color:var(--ink);
-  background:var(--neon);
+  background:var(--moss-bright);
   border:none;
   padding:14px 40px;
   border-radius:999px;
   cursor:pointer;
   transition:box-shadow .2s ease, transform .15s ease, background .2s ease;
 }
-.demo-btn:hover{ box-shadow:0 0 28px var(--neon-glow); transform:translateY(-1px); }
+.demo-btn:hover{ box-shadow:0 0 28px var(--moss-bright-glow); transform:translateY(-1px); }
 .demo-btn.is-running{ background:#fff; }
 .demo-note{
   margin-top:16px;
@@ -305,7 +358,7 @@ a:focus-visible, button:focus-visible{
   font-size:12.5px;
   color:#7b7e8c;
 }
-.demo-note span{ color:var(--neon-dim); font-weight:700; }
+.demo-note span{ color:var(--moss-bright); font-weight:700; }
 
 /* hero load-in motion (single orchestrated moment) */
 .hero-badge,.hero h1,.hero p.lede,.hero-cta,.demo-card{
@@ -329,7 +382,7 @@ a:focus-visible, button:focus-visible{
   max-width:640px;
   margin:0 0 56px;
 }
-.section-head .eyebrow{ color:#7a7f5a; }
+.section-head .eyebrow{ color:var(--moss-deep); }
 .section-head h2{
   font-family:var(--display);
   font-size:clamp(32px, 4vw, 46px);
@@ -348,8 +401,18 @@ a:focus-visible, button:focus-visible{
 .section.on-dark .section-head h2{ color:#fff; }
 .section.on-dark .section-head p{ color:#a9acb9; }
 
+/* scroll-reveal (progressive enhancement, see script.js) */
+.reveal{
+  opacity:0; transform:translateY(18px);
+  transition:opacity .6s cubic-bezier(.16,1,.3,1), transform .6s cubic-bezier(.16,1,.3,1);
+}
+.reveal.is-visible{ opacity:1; transform:translateY(0); }
+
 /* =========================================================
    FEATURES
+   Each card carries one of the app's real accent colors —
+   the same coral / teal / gold / violet / moss / ember used
+   for its equivalent tab or stat inside the app itself.
    ========================================================= */
 .feature-grid{
   display:grid;
@@ -362,11 +425,12 @@ a:focus-visible, button:focus-visible{
 .feature-card{
   background:var(--card);
   border:1px solid var(--line);
+  border-top:3px solid transparent;
   border-radius:var(--radius-md);
   padding:26px 24px;
   transition:transform .18s ease, box-shadow .18s ease;
 }
-.feature-card:hover{ transform:translateY(-4px); box-shadow:0 16px 30px rgba(20,22,40,.08); }
+.feature-card:hover{ transform:translateY(-4px); }
 .feature-icon{
   width:44px; height:44px;
   border-radius:12px;
@@ -383,18 +447,51 @@ a:focus-visible, button:focus-visible{
   font-size:14.5px; line-height:1.55; color:var(--muted);
 }
 .feature-tab{
+  display:inline-block;
   font-family:var(--mono);
   font-size:10.5px;
   letter-spacing:.1em;
   color:#9a9eb0;
   text-transform:uppercase;
   margin-top:14px;
-  display:block;
+  padding:4px 10px;
+  border-radius:999px;
+  background:var(--surface-alt);
 }
+
+.feature-card:nth-child(1){ border-top-color:var(--coral); }
+.feature-card:nth-child(1) .feature-icon{ background:var(--coral-soft); }
+.feature-card:nth-child(1) .feature-tab{ background:var(--coral-soft); color:var(--coral-deep); }
+.feature-card:nth-child(1):hover{ box-shadow:0 16px 30px rgba(255,138,92,.24); }
+
+.feature-card:nth-child(2){ border-top-color:var(--teal); }
+.feature-card:nth-child(2) .feature-icon{ background:var(--teal-soft); }
+.feature-card:nth-child(2) .feature-tab{ background:var(--teal-soft); color:var(--teal-deep); }
+.feature-card:nth-child(2):hover{ box-shadow:0 16px 30px rgba(47,179,154,.24); }
+
+.feature-card:nth-child(3){ border-top-color:var(--gold); }
+.feature-card:nth-child(3) .feature-icon{ background:var(--gold-soft); }
+.feature-card:nth-child(3) .feature-tab{ background:var(--gold-soft); color:var(--gold-deep); }
+.feature-card:nth-child(3):hover{ box-shadow:0 16px 30px rgba(224,169,48,.24); }
+
+.feature-card:nth-child(4){ border-top-color:var(--violet); }
+.feature-card:nth-child(4) .feature-icon{ background:var(--violet-soft); }
+.feature-card:nth-child(4) .feature-tab{ background:var(--violet-soft); color:var(--violet-deep); }
+.feature-card:nth-child(4):hover{ box-shadow:0 16px 30px rgba(141,124,240,.24); }
+
+.feature-card:nth-child(5){ border-top-color:var(--moss); }
+.feature-card:nth-child(5) .feature-icon{ background:var(--moss-soft); }
+.feature-card:nth-child(5) .feature-tab{ background:var(--moss-soft); color:var(--moss-deep); }
+.feature-card:nth-child(5):hover{ box-shadow:0 16px 30px rgba(111,154,46,.24); }
+
+.feature-card:nth-child(6){ border-top-color:var(--ember); }
+.feature-card:nth-child(6) .feature-icon{ background:#ffe4d3; }
+.feature-card:nth-child(6) .feature-tab{ background:#ffe4d3; color:var(--ember-deep); }
+.feature-card:nth-child(6):hover{ box-shadow:0 16px 30px rgba(255,122,69,.24); }
 
 .integration-banner{
   margin-top:20px;
-  background:linear-gradient(135deg, #fdeee7, #eef0f6 60%);
+  background:linear-gradient(135deg, var(--violet-soft), var(--surface-alt) 60%);
   border:1px solid var(--line);
   border-radius:var(--radius-md);
   padding:26px 28px;
@@ -407,6 +504,8 @@ a:focus-visible, button:focus-visible{
 
 /* =========================================================
    SCREENS gallery
+   Caption tags reuse the same section colors as Features, so
+   the two grids read as one coded system.
    ========================================================= */
 .screens-track{
   display:flex;
@@ -448,18 +547,30 @@ a:focus-visible, button:focus-visible{
   color:var(--ink-body);
 }
 .screen-caption span{
-  display:block;
+  display:inline-block;
   font-family:var(--mono);
-  font-weight:400;
-  font-size:11.5px;
+  font-weight:600;
+  font-size:11px;
   letter-spacing:.06em;
   text-transform:uppercase;
+  margin-top:6px;
+  padding:3px 10px;
+  border-radius:999px;
+  background:var(--surface-alt);
   color:var(--muted);
-  margin-top:3px;
 }
+.screen-item:nth-child(1) .screen-caption span{ background:var(--coral-soft); color:var(--coral-deep); }
+.screen-item:nth-child(2) .screen-caption span,
+.screen-item:nth-child(3) .screen-caption span{ background:var(--teal-soft); color:var(--teal-deep); }
+.screen-item:nth-child(4) .screen-caption span,
+.screen-item:nth-child(5) .screen-caption span{ background:var(--gold-soft); color:var(--gold-deep); }
+.screen-item:nth-child(6) .screen-caption span,
+.screen-item:nth-child(7) .screen-caption span{ background:var(--moss-soft); color:var(--moss-deep); }
 
 /* =========================================================
    LEVELS path
+   Each node is colored like its real in-app medal: moss,
+   blue, silver, bronze, steel, then gold for Атлет.
    ========================================================= */
 .levels-track{
   display:flex;
@@ -489,10 +600,20 @@ a:focus-visible, button:focus-visible{
   display:flex; align-items:center; justify-content:center;
   font-size:26px;
   position:relative; z-index:1;
+  transition:transform .18s ease;
 }
+.level-node:hover .node-dot{ transform:translateY(-3px); }
+
+.level-node:nth-child(1) .node-dot{ border-color:var(--moss); background:var(--moss-soft); }
+.level-node:nth-child(2) .node-dot{ border-color:var(--blue); background:#e8f1fc; }
+.level-node:nth-child(3) .node-dot{ border-color:var(--steel); background:#eef0f3; }
+.level-node:nth-child(4) .node-dot{ border-color:var(--bronze); background:#f7ece0; }
+.level-node:nth-child(5) .node-dot{ border-color:#8a90a0; background:#eceef2; }
+
 .level-node.is-final .node-dot{
-  border-color:var(--neon-dim);
-  background:#fbffe8;
+  border-color:var(--gold);
+  background:linear-gradient(160deg,#fffbe9,#fbf0cf);
+  box-shadow:0 0 0 4px rgba(224,169,48,.15);
 }
 .level-node h4{
   font-size:14.5px; font-weight:800; margin-bottom:4px;
@@ -513,14 +634,31 @@ a:focus-visible, button:focus-visible{
 @media (max-width:460px){ .badge-grid{grid-template-columns:1fr} }
 .badge-card{
   background:var(--card);
-  border:1px solid var(--line);
+  border:1.5px solid rgba(111,154,46,.4);
   border-radius:var(--radius-sm);
   padding:20px;
   display:flex; align-items:center; gap:14px;
+  transition:box-shadow .18s ease, transform .18s ease;
 }
-.badge-card .b-icon{ font-size:24px; }
+.badge-card:hover{ transform:translateY(-2px); box-shadow:0 12px 24px rgba(20,22,40,.08); }
+.badge-card .b-icon{
+  width:48px; height:48px; flex:none;
+  border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:23px;
+  background:radial-gradient(circle, rgba(111,154,46,.32) 0%, transparent 72%);
+}
 .badge-card h5{ font-size:14px; font-weight:800; margin-bottom:3px; }
 .badge-card p{ font-size:12.5px; color:var(--muted); line-height:1.4; }
+
+/* per-badge glow, matching the real reward icons: sprout, flame,
+   lightning, diamond, crown, trophy */
+.badge-card:nth-child(1) .b-icon{ background:radial-gradient(circle, rgba(111,154,46,.35) 0%, transparent 72%); }
+.badge-card:nth-child(2) .b-icon{ background:radial-gradient(circle, rgba(255,122,69,.35) 0%, transparent 72%); }
+.badge-card:nth-child(3) .b-icon{ background:radial-gradient(circle, rgba(224,169,48,.38) 0%, transparent 72%); }
+.badge-card:nth-child(4) .b-icon{ background:radial-gradient(circle, rgba(79,143,224,.32) 0%, transparent 72%); }
+.badge-card:nth-child(5) .b-icon{ background:radial-gradient(circle, rgba(224,169,48,.38) 0%, transparent 72%); }
+.badge-card:nth-child(6) .b-icon{ background:radial-gradient(circle, rgba(224,169,48,.38) 0%, transparent 72%); }
 
 /* =========================================================
    DOWNLOAD (dark bookend)
