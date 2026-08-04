@@ -484,3 +484,32 @@ setLanguage('uk');
     });
   });
 })();
+
+/* ---------------------------------------------------------
+   One-time "this scrolls sideways" hint for the screenshots
+   gallery: nudge right a little, then settle back. Only fires
+   once, only if the visitor hasn't already grabbed the strip
+   themselves in the meantime, and skipped under reduced motion.
+   --------------------------------------------------------- */
+(() => {
+  const track = document.querySelector('.screens-track');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!track || prefersReduced || !('IntersectionObserver' in window)) return;
+
+  const io = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      obs.disconnect();
+      setTimeout(() => {
+        track.scrollTo({ left: 56, behavior: 'smooth' });
+        setTimeout(() => {
+          if (Math.abs(track.scrollLeft - 56) < 40) {
+            track.scrollTo({ left: 0, behavior: 'smooth' });
+          }
+        }, 550);
+      }, 450);
+    });
+  }, { threshold: 0.4 });
+
+  io.observe(track);
+})();
